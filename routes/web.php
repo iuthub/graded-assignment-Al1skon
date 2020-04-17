@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('default');
+Route::post('/task/add', 'TaskController@add')->name('taskAdd');
+Route::get('/task/{id}/delete', 'TaskController@delete')->name('taskDelete');
+
+Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
