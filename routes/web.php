@@ -14,10 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@index')->name('default');
+Route::get('/', 'TaskController@index')->name('default');
 Route::post('/task/add', 'TaskController@add')->name('taskAdd');
 Route::get('/task/{id}/delete', 'TaskController@delete')->name('taskDelete');
-
+Route::get('/task/{id}/edit', 'TaskController@edit')->name('taskEdit');
 Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');

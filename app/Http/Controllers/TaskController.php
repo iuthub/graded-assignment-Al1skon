@@ -10,7 +10,7 @@ class TaskController extends Controller
 
     public function __construct()
     {
-        // $this->authorize('auth');
+        $this->middleware('auth');
     }
 
     public function index()
@@ -31,7 +31,7 @@ class TaskController extends Controller
         if ($task->save()) {
             return redirect()->back()->with('success', 'The task is saved now');
         } else {
-            return redirect()->back()->with('error', 'The task is now saved now');
+            return redirect()->back()->with('error', 'The task is not saved');
         }
     }
 
@@ -42,6 +42,21 @@ class TaskController extends Controller
             return redirect()->route('default')->with('success', 'The task is deleted now');
         } else {
             return redirect()->route('default')->with('error', 'The task is not deleted');
+        }
+    }
+
+
+    public function edit($id)
+    {
+        $data = request()->validate([
+            'title' => 'required',
+        ]);
+
+        $task = Task::findOrFail($id);
+        if ($task->save()) {
+            return redirect()->back()->with('success', 'The task is saved now');
+        } else {
+            return redirect()->back()->with('error', 'The task is not saved');
         }
     }
 }
